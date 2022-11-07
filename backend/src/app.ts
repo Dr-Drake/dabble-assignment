@@ -19,6 +19,7 @@ class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
+  public apolloServer: ApolloServer;
 
   constructor(resolvers: NonEmptyArray<Function> | NonEmptyArray<string>) {
     this.app = express();
@@ -28,7 +29,7 @@ class App {
     //this.connectToDatabase();
     this.initializeMiddlewares();
     this.initApolloServer(resolvers);
-    // this.initializeErrorHandling();
+    this.initializeErrorHandling();
   }
 
   public async listen() {
@@ -43,6 +44,10 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+
+  public getApolloServer(){
+    return this.apolloServer;
   }
 
   private connectToDatabase() {
@@ -68,7 +73,7 @@ class App {
       //authChecker: authChecker,
     });
 
-    const apolloServer = new ApolloServer({
+    this.apolloServer = new ApolloServer({
       schema: schema,
       plugins: [
         this.env === 'production'
@@ -95,8 +100,8 @@ class App {
       },
     });
 
-    await apolloServer.start();
-    apolloServer.applyMiddleware({ app: this.app, cors: ORIGIN, path: '/graphql' });
+    await this.apolloServer.start();
+    this.apolloServer.applyMiddleware({ app: this.app, cors: ORIGIN, path: '/graphql' });
   }
 
   private initializeErrorHandling() {

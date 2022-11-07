@@ -11,6 +11,8 @@ export const dbConnection: ConnectionOptions = {
   database: DB_DATABASE,
   synchronize: true,
   logging: false,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
   entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
   migrations: [join(__dirname, '../**/*.migration{.ts,.js}')],
   subscribers: [join(__dirname, '../**/*.subscriber{.ts,.js}')],

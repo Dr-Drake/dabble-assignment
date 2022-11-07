@@ -96,6 +96,15 @@ class App {
       formatError: error => {
         errorLogger(error);
 
+        if (error.extensions.exception && error.extensions.exception.status){
+          return {
+            message: error.message,
+            status: error.extensions.exception.status
+          }
+        }
+
+        else
+
         return error;
       },
     });

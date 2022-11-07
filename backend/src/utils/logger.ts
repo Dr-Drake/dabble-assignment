@@ -3,6 +3,7 @@ import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
 import { LOG_DIR } from '@config';
+import { GraphQLError } from 'graphql';
 
 // logs dir
 const logDir: string = join(__dirname, LOG_DIR);
@@ -61,7 +62,7 @@ export const responseLogger = request => {
   logger.info(query);
 };
 
-export const errorLogger = error => {
+export const errorLogger = (error: GraphQLError) => {
   const { validationErrors } = error.extensions.exception;
 
   let message = '';
@@ -70,6 +71,5 @@ export const errorLogger = error => {
   } else {
     message = error.message;
   }
-
   logger.error(message);
 };

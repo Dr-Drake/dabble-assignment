@@ -20,20 +20,20 @@
     "resolveJsonModule": true,
     "importHelpers": true,
     "baseUrl": "src",
-    // "paths": {
-    //   "@/*": ["*"],
-    //   "@config": ["config"],
-    //   "@databases": ["databases"],
-    //   "@dtos/*": ["dtos/*"],
-    //   "@entities/*": ["entities/*"],
-    //   "@exceptions/*": ["exceptions/*"],
-    //   "@interfaces/*": ["interfaces/*"],
-    //   "@middlewares/*": ["middlewares/*"],
-    //   "@repositories/*": ["repositories/*"],
-    //   "@resolvers/*": ["resolvers/*"],
-    //   "@typedefs/*": ["typedefs/*"],
-    //   "@utils/*": ["utils/*"]
-    // }
+    "paths": {
+      "@/*": ["*"],
+      "@config": ["config"],
+      "@databases": ["databases"],
+      "@dtos/*": ["dtos/*"],
+      "@entities/*": ["entities/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@repositories/*": ["repositories/*"],
+      "@resolvers/*": ["resolvers/*"],
+      "@typedefs/*": ["typedefs/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.json", ".env"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]

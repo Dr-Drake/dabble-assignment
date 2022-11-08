@@ -8,9 +8,9 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import { buildSchema, NonEmptyArray } from 'type-graphql';
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 import { NODE_ENV, PORT, ORIGIN, CREDENTIALS } from '@config';
-import { dbConnection } from '@databases';
+import { dbConnection, dbConnectionProd } from '@databases';
 //import { authMiddleware, authChecker } from '@middlewares/auth.middleware';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, responseLogger, errorLogger } from '@utils/logger';
@@ -51,7 +51,10 @@ class App {
   }
 
   private connectToDatabase() {
-    createConnection(dbConnection);
+    let cb = (value: Connection)=> logger.info("Database connected");
+    process.env.NODE_ENV === 'production' ?
+    createConnection(dbConnectionProd).then(cb) :
+    createConnection(dbConnection).then(cb);
   }
 
   private initializeMiddlewares() {

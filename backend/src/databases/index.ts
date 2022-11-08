@@ -23,3 +23,22 @@ export const dbConnection: ConnectionOptions = {
     subscribersDir: 'src/subscriber',
   },
 };
+
+export const dbConnectionProd: ConnectionOptions = {
+  type: 'mongodb',
+  url: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.iebwm.mongodb.net/?retryWrites=true&w=majority`,
+  //database: DB_DATABASE,
+  synchronize: true,
+  logging: false,
+  ssl: true,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
+  migrations: [join(__dirname, '../**/*.migration{.ts,.js}')],
+  subscribers: [join(__dirname, '../**/*.subscriber{.ts,.js}')],
+  cli: {
+    entitiesDir: 'src/entities',
+    migrationsDir: 'src/migration',
+    subscribersDir: 'src/subscriber',
+  },
+};

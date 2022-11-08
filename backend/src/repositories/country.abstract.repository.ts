@@ -29,7 +29,7 @@ export default abstract class FakeCountryRepository implements ICountryRepositor
         }
 
         let newCountry: Country = {
-            id: localDb.length + 2,
+            _id: localDb.length + 2,
             ...country
         }
         localDb.push(newCountry);

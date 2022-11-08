@@ -78,6 +78,7 @@ class App {
 
     this.apolloServer = new ApolloServer({
       schema: schema,
+      introspection: true, // For the sake of demonstration
       plugins: [
         this.env === 'production'
           ? ApolloServerPluginLandingPageProductionDefault({ footer: false })

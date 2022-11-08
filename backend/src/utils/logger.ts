@@ -15,11 +15,13 @@ if (!existsSync(logDir)) {
 // Define log format
 const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
 
+// 
+
 /*
  * Log Level
  * error: 0, warn: 1, info: 2, http: 3, verbose: 4, debug: 5, silly: 6
  */
-export const logger = winston.createLogger({
+const devLogger = winston.createLogger({
   format: winston.format.combine(
     winston.format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
@@ -51,11 +53,27 @@ export const logger = winston.createLogger({
   ],
 });
 
-logger.add(
+devLogger.add(
   new winston.transports.Console({
     format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
   }),
 );
+
+const prodLogger = winston.createLogger({
+  format: winston.format.combine(
+    winston.format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
+    logFormat,
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
+    }),
+  ],
+});
+
+export const logger = process.env.NODE_ENV === 'production' ? prodLogger : devLogger;
 
 export const responseLogger = request => {
   const { query } = request.request;

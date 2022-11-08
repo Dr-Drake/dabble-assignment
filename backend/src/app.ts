@@ -21,12 +21,12 @@ class App {
   public port: string | number;
   public apolloServer: ApolloServer;
 
-  constructor(resolvers: NonEmptyArray<Function> | NonEmptyArray<string>) {
+  constructor(resolvers: NonEmptyArray<Function> | NonEmptyArray<string>, openDbConnection?: boolean) {
     this.app = express();
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
-    //this.connectToDatabase();
+    openDbConnection && this.connectToDatabase();
     this.initializeMiddlewares();
     this.initApolloServer(resolvers);
     this.initializeErrorHandling();

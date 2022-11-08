@@ -1,12 +1,11 @@
 import App from "../app";
-import { CountryResolver } from "../resolvers/country.resolver";
 import { CountryTypeDef } from "../typedefs/country.type";
 import { gql } from "apollo-server-core";
 import { Connection } from "typeorm";
 import { testConn } from "./db.setup";
 import { CreateCountryDto } from "@/dtos/country.dto";
-import { mapCountryToTypeDef } from "@/utils/util";
-import { GraphQLError } from "graphql";
+// import { MockCountryResolver } from "@/resolvers/country.mock.resolver";
+import { CountryResolver } from "@/resolvers/country.resolver";
 
 // Open and close Db connection
 let conn: Connection;
@@ -16,7 +15,6 @@ beforeAll(async()=>{
 
 afterAll(async ()=>{
     await conn.close();
-    await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 })
 
 describe('Country Resolver (e2e)', ()=>{

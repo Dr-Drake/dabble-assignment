@@ -40,11 +40,16 @@ export default abstract class FakeCountryRepository implements ICountryRepositor
         let resultIndex = localDb.findIndex((c)=> c.country === name);
 
         // First check if country exists
+        if (resultIndex === -1) {
+            throw new HttpException(404, 'Country not found'); 
+        }
+
+        // Then check if country exists with the updated name
         let countrySearch = localDb.find((c)=> c.country === country.country );
 
         if (countrySearch && countrySearch.country !== name) {
             throw new HttpException(400, `Country with name ${country.country} already exists`);
-        }
+        }   
 
         let prevCountry = localDb[resultIndex];
 

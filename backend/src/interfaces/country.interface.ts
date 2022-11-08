@@ -1,5 +1,7 @@
+import { ObjectID } from "typeorm";
+
 export interface Country {
-  id: number | string;
+  _id: ObjectID | string | number;
   country: string;
   year: string;
   area: number;

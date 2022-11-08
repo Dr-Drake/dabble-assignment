@@ -5,6 +5,6 @@ import { CountryResolver } from './resolvers/country.resolver';
 
 validateEnv();
 
-const app = new App([CountryResolver]);
+const app = new App([CountryResolver], true);
 
 app.listen();

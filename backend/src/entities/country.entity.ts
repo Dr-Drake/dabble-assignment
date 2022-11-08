@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { 
   BaseEntity, Entity, 
-  Column, Unique, CreateDateColumn, UpdateDateColumn, ObjectIdColumn 
+  Column, Unique, CreateDateColumn, UpdateDateColumn, ObjectIdColumn, Index, ObjectID 
 } from 'typeorm';
 import { Country } from '@/interfaces/country.interface';
 
@@ -9,11 +9,12 @@ import { Country } from '@/interfaces/country.interface';
 export class CountryEntity extends BaseEntity implements Country {
 
   @ObjectIdColumn()
-  id: string;
+  _id: ObjectID;
 
   @Column()
   @IsNotEmpty()
   @Unique(['country'])
+  @Index()
   country: string;
 
   @Column()

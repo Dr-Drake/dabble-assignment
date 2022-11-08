@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { ConnectionOptions } from 'typeorm';
-import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from '@config';
+import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE, DB_AUTH_SRC } from '@config';
 
 export const dbConnection: ConnectionOptions = {
   type: 'mongodb',
@@ -9,6 +9,7 @@ export const dbConnection: ConnectionOptions = {
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_DATABASE,
+  authSource: DB_AUTH_SRC,
   synchronize: true,
   logging: false,
   useUnifiedTopology: true,

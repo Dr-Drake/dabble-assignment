@@ -1,7 +1,10 @@
 import React from "react";
 import { RiSearchLine } from "react-icons/ri";
 
-const Toolbar: React.FC<any> = ()=>{
+export interface ToolbarProps{
+    onAdd?: ()=> void;
+}
+const Toolbar: React.FC<ToolbarProps> = ({ onAdd })=>{
     
     return(
         <div className="flex items-center py-4">
@@ -22,7 +25,9 @@ const Toolbar: React.FC<any> = ()=>{
             <div className="flex-1"></div>
 
             {/** Add Button */}
-            <button className="bg-site hover:bg-site2 text-white font-bold py-2 px-4 rounded">
+            <button className="bg-site hover:bg-site2 text-white font-bold py-2 px-4 rounded"
+                onClick={onAdd}
+            >
                 Add Entry
             </button>
         </div>

@@ -19,7 +19,7 @@ const MainLayout: React.FC<any> = ({ children })=>{
             <NavigationBar/>
 
             {/** Content */}
-            <div className='flex-1 p-1 lg:p-5'>
+            <div className='flex-1 p-3 lg:p-5'>
                 { children }
             </div>
         </div>

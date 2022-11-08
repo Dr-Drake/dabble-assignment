@@ -7,9 +7,11 @@ import ClickAwayListener from 'react-click-away-listener';
 export interface TableProps{
     data?: CountryResponseData[];
     isLoading?: boolean;
+    onUpdate?: (country: CountryResponseData)=> void;
+    onDelete?: (name: string)=> void;
 }
 const Table: React.FC<TableProps> = ({
-    data = [], isLoading
+    data = [], isLoading, onUpdate, onDelete
 })=>{
 
     // State // TODO pagination
@@ -36,6 +38,15 @@ const Table: React.FC<TableProps> = ({
             setActiveIndex(index);
             setShowMore(!showMore);
         }
+    }
+    const handleUpdate = (country: CountryResponseData)=>{
+        handleMoreClickAway();
+        onUpdate && onUpdate(country);
+    }
+
+    const handleDelete = (name: string)=>{
+        handleMoreClickAway();
+        onDelete && onDelete(name);
     }
 
     return(
@@ -93,10 +104,14 @@ const Table: React.FC<TableProps> = ({
                                                 showMore && activeIndex === i &&
                                                 <ClickAwayListener onClickAway={handleMoreClickAway}>
                                                     <div className='absolute top-0 z-10 bg-white rounded-lg border-2'>
-                                                        <div className='p-3 cursor-pointer hover:bg-whiteFaded text-xs lg:text-sm'>
+                                                        <div className='p-3 cursor-pointer hover:bg-whiteFaded text-xs lg:text-sm'
+                                                            onClick={()=> handleUpdate(item)}
+                                                        >
                                                             Update
                                                         </div>
-                                                        <div className='p-3 cursor-pointer hover:bg-whiteFaded text-xs lg:text-sm'>
+                                                        <div className='p-3 cursor-pointer hover:bg-whiteFaded text-xs lg:text-sm'
+                                                            onClick={()=> handleDelete(item.Country)}
+                                                        >
                                                             Delete
                                                         </div>
                                                     </div>

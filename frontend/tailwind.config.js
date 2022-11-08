@@ -13,10 +13,16 @@ module.exports = {
         black1a: '#1A1A1A',
         greyf3: "#F3F3F3",
         whiteFaded: 'rgba(246, 246, 246, 0.8)',
+        backdrop: 'rgba(0,0,0,0.6)',
+        errorRed: '#D90B2C'
       },
 
       fontSize: {
         xss: '0.5rem'
+      },
+
+      margin: {
+        '20px': '20px',
       }
     },
   },

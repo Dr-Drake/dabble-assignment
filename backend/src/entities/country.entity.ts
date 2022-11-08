@@ -14,7 +14,7 @@ export class CountryEntity extends BaseEntity implements Country {
   @Column()
   @IsNotEmpty()
   @Unique(['country'])
-  @Index()
+
   country: string;
 
   @Column()

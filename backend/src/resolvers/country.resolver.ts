@@ -16,6 +16,15 @@ export class CountryResolver extends CountryRepository{
         return countries.map((item)=> mapCountryToTypeDef(item));
     }
 
+    @Query(() => [CountryTypeDef], {
+        description: 'Returns a list of country filtered by a name search parameter',
+    })
+    
+    public async getCountriesByName(@Arg('name') name: string): Promise<CountryTypeDef[]> {
+        const countries: Country[] = await this.countryFindAllByName(name);
+        return countries.map((item)=> mapCountryToTypeDef(item));
+    }
+
     @Query(() => CountryTypeDef, {
         description: 'Returns a single country given the name',
     })

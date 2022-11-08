@@ -10,6 +10,11 @@ export default abstract class FakeCountryRepository implements ICountryRepositor
         return new Promise((resolve)=> resolve(localDb));
     }
 
+    countryFindAllByName(name: string): Promise<Country[]> {
+        let countries = localDb.filter((c)=> c.country.toLowerCase().includes(name.toLowerCase()));
+        return new Promise((resolve)=> resolve(countries));
+    }
+
     countryFindByName(name: string): Promise<Country> {
         let country = localDb.find((c)=> c.country === name );
 

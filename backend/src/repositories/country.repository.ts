@@ -1,4 +1,4 @@
-import { EntityRepository } from 'typeorm';
+import { EntityRepository, Like } from 'typeorm';
 import { ICountryRepository } from '@/interfaces/country.repository.interface';
 import { Country } from '@/interfaces/country.interface';
 import { CreateCountryDto } from '@/dtos/country.dto';
@@ -12,6 +12,16 @@ export default class CountryRepository implements ICountryRepository{
     public async countryFindAll(): Promise<Country[]> {
         const countries: Country[] = await CountryEntity.find();
         return countries;
+    }
+
+    /**
+     * Note: Implementation vulnerable to SQL injection. Fix later
+     * @param name 
+     * @returns 
+     */
+    public async countryFindAllByName(name: string): Promise<Country[]> {
+        const countries: Country[] = await CountryEntity.find();
+        return countries.filter((c)=> c.country.toLowerCase().includes(name.toLowerCase()));;
     }
 
     public async countryFindByName(name: string): Promise<Country> {

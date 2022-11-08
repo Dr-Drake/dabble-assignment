@@ -50,7 +50,7 @@ const Table: React.FC<TableProps> = ({
     }
 
     return(
-        <div className='flex flex-col justify-between flex-1'>
+        <div className='flex flex-col justify-between flex-1' onClick={handleMoreClickAway}>
             <table className='w-full border-b border-black1aFaded'>
                 <thead>
                     <tr className='bg-greyf3'>

@@ -150,6 +150,33 @@ describe('Country Resolver (e2e)', ()=>{
         
         });
 
+        it('response statusCode 200 / getCountriesByName', async () => {
+         
+            const app = new App([CountryResolver]);
+            const apolloServer = app.getApolloServer();
+
+            if (apolloServer) {
+                const result = await apolloServer.executeOperation({
+                    query: gql`
+                        query {
+                            getCountriesByName(name: land) {
+                                Country
+                                Year
+                                Area
+                                Total_population
+                            }
+                        }
+                    `
+                });
+
+                expect(result).toBeTruthy();
+                expect(result).toHaveProperty("data");
+                expect(result.errors).toBeFalsy();
+                expect(result).toBeInstanceOf([CountryTypeDef]);
+            }
+        
+        });
+
         it('response statusCode 200 / getCountryByName', async () => {
          
             const app = new App([CountryResolver]);

@@ -9,3 +9,7 @@ export interface CountryResponseData {
 export interface CountryResponse{
   "getCountries": CountryResponseData[];
 }
+
+export interface CountryByNameResponse{
+  getCountriesByName: CountryResponseData[];
+}

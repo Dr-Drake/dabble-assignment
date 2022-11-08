@@ -13,6 +13,7 @@ import { useCreateCountryMutation } from '../hooks/useCreateCountryMutation';
 import { CountryResponseData } from '../types/CountryResponse';
 import { useUpdateCountryMutation } from '../hooks/useUpdateCountryMutation';
 import { useDeleteCountryMutation } from '../hooks/useDeleteCountryMutation';
+import useCountryPredictions from '../hooks/useCountryPredictions';
 
 const Home: NextPage<any> = () => {
 
@@ -23,9 +24,17 @@ const Home: NextPage<any> = () => {
   const { deleteCountry, loading: deleteLoading } = useDeleteCountryMutation();
 
   // State
+  interface Search{
+    term: string;
+    fetchPredictions: boolean;
+  }
   const [show, setShow] = React.useState<boolean>(false);
   const [dataToUpdate, setDataToUpdate] = React.useState<CountryResponseData>();
+  const [search, setSearch] = React.useState<Search>({ term: '', fetchPredictions: false });
+  const [displayedData, setDisplayedData] = React.useState<CountryResponseData[]>([]);
 
+  // Predictions
+  const [predictions, predictionLoading] = useCountryPredictions(search.term, search.fetchPredictions)
 
   // Handlers
   const openModal = ()=> {
@@ -37,6 +46,14 @@ const Home: NextPage<any> = () => {
   const handleUpdate = (country: CountryResponseData)=>{
     setDataToUpdate(country);
     setShow(true);
+  }
+
+  const handleBlur = ()=>{
+    setSearch({ term: search.term, fetchPredictions: true });
+  }
+
+  const handleSearchChange = (name: string)=>{
+    setSearch({ term: name, fetchPredictions: true });
   }
 
   const handleDelete = async (name: string)=>{
@@ -113,13 +130,25 @@ const Home: NextPage<any> = () => {
     }
   }
 
-  // Effect
+
+  // Effects
   React.useEffect(()=>{
     if (error) {
       console.log(JSON.stringify(error));
       toast.error(parseErrorMessage(error));
     }
   },[error]);
+
+  React.useEffect(()=>{
+
+  if (predictions && predictions.length > 0) {
+    setDisplayedData(predictions)
+  }
+  else if (data) {
+    setDisplayedData(data)
+  }
+    
+  },[predictions, data]);
 
 
   return (
@@ -148,9 +177,12 @@ const Home: NextPage<any> = () => {
       {/** Toolbar and Table */}
       <Toolbar
         onAdd={openModal}
+        onSearchChange={handleSearchChange}
+        onSearchClickaway={handleBlur}
+        isLoading={predictionLoading}
       />
        <Table 
-        data={data}
+        data={displayedData}
         isLoading={isLoading}
         onUpdate={handleUpdate}
         onDelete={handleDelete}

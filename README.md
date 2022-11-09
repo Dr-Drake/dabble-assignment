@@ -1,5 +1,5 @@
 ## Description
-A repository contains the code for a fairly simple assessment assigned to me by a potential employer.
+This repository contains the code for a fairly simple assessment assigned to me by a potential employer.
 It show cases my attempt to build a graphql server that allows CRUD operations on a dataset of countries.
 The project was written in [Typescript](http://typescript.com/).
 Other technologies here include:
@@ -61,12 +61,17 @@ $ npm run test
 ## Gotchas
 
 #### Environment variables
-Create a the following .env files:
+Create a the following .env files for the backend:
 - .env.development.local 
 - .env.production.local
 - .env.test.local
 
-Make sure each have the following environment variables: PORT, DB_HOST, DB_PORT DB_USER, DB_PASSWORD, DB_DATABASE, DB_AUTH_SRC, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN, and CREDENTIALS
+Create a the following .env files for the frontend:
+- .env.local 
+
+Make sure each have the following environment variables for the backend: PORT, DB_HOST, DB_PORT DB_USER, DB_PASSWORD, DB_DATABASE, DB_AUTH_SRC, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN, and CREDENTIALS.
+
+While for the frontend, it's just CLIENT_URL.
 
 ## Stay in touch
 

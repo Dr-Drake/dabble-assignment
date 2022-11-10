@@ -60,6 +60,9 @@ $ npm run test
 ```
 ## Gotchas
 
+#### Public graphql url
+Since I'm hosting this on render, for some reason you first have to visit the url in the browser before it gets working on apollo's graphql sandbox.
+
 #### Environment variables
 Create a the following .env files for the backend:
 - .env.development.local 

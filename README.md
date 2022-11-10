@@ -71,7 +71,8 @@ Create a the following .env files for the frontend:
 
 Make sure each have the following environment variables for the backend: PORT, DB_HOST, DB_PORT DB_USER, DB_PASSWORD, DB_DATABASE, DB_AUTH_SRC, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN, and CREDENTIALS.
 
-While for the frontend, it's just CLIENT_URL.
+While for the frontend, it's just NEXT_PUBLIC_CLIENT_URL.
+
 
 ## Stay in touch
 
